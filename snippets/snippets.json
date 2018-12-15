@@ -1,0 +1,116 @@
+{
+  "Custom type": {
+    "prefix": "graphql-custom-type",
+    "body": [
+      "type Product {", 
+      "  name: String", 
+      "  id: Int", 
+      "  inStock: Boolean",
+      "}"
+    ],
+    "description": "Creates an example of custom type"
+  },
+  "Input type": {
+    "prefix": "graphql-input-type",
+    "body": [
+      "input ProductInput {",
+      "  name: String",
+      "  id: Int",
+      "  inStock: Boolean",
+      "}"
+    ],
+    "description": "Creates an example of an input type"
+  },
+  "Query type": {
+    "prefix": "graphql-query-type",
+    "body": [
+      "type Product {",
+      "  name: String",
+      "  id: Int",
+      "  inStock: Boolean",
+      "}",
+      "",
+      "type Response {",
+      "  status: Int",
+      "  message: String",
+      "}",
+      "",
+      "type Query {",
+      "  products: [Product]",
+      "  product(productId: Int!): Response",
+      "}"
+    ],
+    "description": "Creates an example of the reserved Query type"
+  },
+  "Mutation type": {
+    "prefix": "graphql-mutation-type",
+    "body": [
+      "type Response {",
+      "  status: Int",
+      "  message: String",
+      "}",
+      "input ProductInput {",
+      "  name: String",
+      "  id: Int",
+      "  inStock: Boolean",
+      "}",
+      "",
+      "type Mutation {",
+      "  createProduct(product: ProductInput!): Response",
+      "  updateProduct(product: ProductInput!): Response",
+      "  removeProduct(id: Int!): Response",
+      "}"
+    ],
+    "description": "Creates an example of the reserved Mutation type"
+  },
+  "GraphQL Apollo resolver": {
+    "prefix": "graphql-apollo-server-query-resolver",
+    "body": [
+      "const products = [];",
+      "const getAllProducts = () => {",
+      "  return Promise.resolve(products);",
+      "}",
+      "",
+      "module.exports = {",
+      "  Query: {",
+      "    products: async () => getAllProducts()",
+      "  }",
+      "};"
+    ],
+    "description": "Creates an example of a query resolver for Apollo server"
+  },
+  "GraphQL Apollo parameter resolver": {
+    "prefix": "graphql-apollo-server-query-parameter-resolver",
+    "body": [
+      "const products = [];",
+      "const getProductById = (id) => {",
+      "  return Promise.resolve(products.find(p => p.id === id);",
+      "}",
+      "",
+      "module.exports = {",
+      "  Query: {",
+      "    products: async (_, { id }) => getProductById(id)",
+      "  }",
+      "};"
+    ],
+    "description": "Creates an example of a query resolver, with a parameter, for Apollo server"
+  },
+  "GraphQL Apollo mutation resolver": {
+    "prefix": "graphql-apollo-server-mutation-resolver",
+    "body": [
+      "let products = [];",
+      "const createProduct = (product) => {",
+      "  const newId =  products.length === 0 ? 1: products[products.length -1].id + 1",
+      "  products = [ ...products, {...product, id: newId}]",
+      "  return Promise.resolve();",
+      "}",
+      "",
+      "module.exports = {",
+      "  Mutation: {",
+      "    createProduct: async (_, { product }) => createProduct(product)",
+      "  }",
+      "};"
+    ],
+    "description": "Creates an example of a mutation resolver, with a parameter, for Apollo server"
+  }
+}
